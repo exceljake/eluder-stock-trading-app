@@ -1,0 +1,22 @@
+<% admin ? path = "/admin/transactions/#{transaction.id}"
+  : path ="/trader/transactions/#{transaction.id}" %>
+
+<%= link_to "#{path}" do %>
+
+  <% if time %>
+
+    <span><%= transaction.created_at.localtime.strftime("%l:%M %p") %></span>
+    
+  <% end %>
+  <% if admin %>
+
+    <span><%= transaction.user.first_name %> <%= transaction.user.last_name %></span>
+
+  <% end %>
+
+  <span><%= transaction.stock.symbol %></span>
+  <span><%= transaction.action.upcase %></span>
+  <span><%= transaction.quantity %> <%= "unit".pluralize(transaction.quantity) %></span>
+  <span><%= format_currency(transaction.price) %></span>
+  
+<% end %>

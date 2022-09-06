@@ -1,0 +1,7 @@
+<%- if controller_name != 'sessions' %>
+  <%= link_to "Have an account? Sign in here.", new_user_session_path, class: "text-sm underline" %><br />
+<% end %>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <%= link_to "Create an account", register_path, class:"underline" %><br />
+<% end %>

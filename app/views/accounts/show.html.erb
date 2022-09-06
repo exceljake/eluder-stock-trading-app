@@ -1,0 +1,70 @@
+<%= render "partials/header" %>
+<%= render "partials/navigation" %>
+
+<h1>Trader Profile</h1>
+
+<div>
+  <h2>Account</h2>
+  <p>Name: <%= @account.first_name %> <%= @account.last_name %></p>
+  <p>Email: <%= @account.email %></p>
+  <%= @account.status.capitalize %>
+  <div>
+    </div>
+
+      <% if @account.status == "pending" %>
+
+        <%= link_to "Approve", approve_account_path(@account), data: { turbo_method: :patch } %>
+
+      <% end %>
+
+    </div>
+    <div>
+      <%= link_to "Edit", edit_account_path(@account) %> |
+      <%= link_to "Delete", account_path(@account), data: { turbo_method: :delete, turbo_confirm: "This will delete current trader account and all relevant data. Proceed?" } %>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h2>Portfolio</h2>
+
+  <% if !@account.portfolio or @account.status == "pending" %>
+    
+    <%= render "partials/notice", title: "Not Available", check: { account: @account } %>
+
+  <% elsif @account.portfolio %>
+
+    <p>Total Worth: <%= format_currency(@account.portfolio.overall_worth) %></p>
+    <h3>Properties</h3>
+
+    <% if !@account.properties.empty? %>
+      <% @account.properties.each do |property| %>
+
+        <%= render "partials/property_item", admin: true, property: property %>
+
+      <% end %>
+    <% else %>
+
+      <p>Trader does not own any stock</p>
+
+    <% end %>
+  <% end %>
+
+</div>
+
+<div>
+  <h2>Latest Transactions</h2>
+
+  <% if !@account.transactions.empty? %>
+    <% @account.transactions.each do |transaction| %>
+
+      <%= render "partials/transaction_item", transaction: transaction, time: false, admin: true %><br/>
+      
+    <% end %>
+  <% else %>
+
+    <p>Trader has not made any transactions</p>
+
+  <% end %>
+
+</div>

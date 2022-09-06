@@ -1,0 +1,13 @@
+<div>
+  <h3><%= title %></h3>
+  <p><%= portfolio && status == "approved" ? 
+    "You may now add stocks to your portfolio" : 
+      "To begin trading stocks, You need to:" %></p>
+  <ul>
+    <li><%= "✅" if portfolio %> Setup your Trader Portfolio</li>
+    <li><%= "✅" if status == "approved" %> Get your Trader Account approved <em><%= "(This might take some time)" if status != "approved" %></em></li>
+  </ul>
+  <% if redirect %>
+    <%= link_to "Get Started", trader_portfolio_path %>
+  <% end %>
+</div>

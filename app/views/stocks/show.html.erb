@@ -1,0 +1,74 @@
+<%= render "partials/header" %>
+<%= render "partials/navigation" %>
+
+<h1>Stock Profile</h1>
+<%= link_to "Stock Listings", stocks_path %>
+<div>
+  <img src="<%= @stock.logo %>" alt="<%= @stock.name %>">
+
+  <div>
+    <h2><%= @stock.name %></h2>
+    <p>Symbol: <%= @stock.symbol %></p>
+    <p>Price: <%= @stock.latest_price %></p>
+    <p>Change Percent: <%= @stock.change_percent %></p>
+    <p><em>
+      Updated <%= @stock.updated_at.localtime.strftime("%l:%M %p %e %b %Y") %>
+    </em></p>
+  </div>
+
+  <div>
+     <p>Exchange: <%= @stock.exchange %></p>
+    <p>Sector: <%= @stock.sector %></p>
+    <p>Industry: <%= @stock.industry %></p>
+    <p><%= @stock.description %></p>
+  </div>
+</div>
+
+
+<% if current_user.role == "trader" %>
+
+  <% if @portfolio && current_user.status == "approved" %>
+
+    <%= render "transactions/buy_form" %>
+    <%= render "transactions/sell_form" %>
+
+    <%= render "partials/notice", title: "Before you trade,", check: { stock: @stock, property: @property } %>
+
+    <% if @transactions %>
+
+      <h2>Recent Transactions (<%= @stock.symbol %>)</h2>
+
+      <% @transactions.each do |transaction| %>
+
+        <%= render "partials/transaction_item", transaction: transaction, time: false, admin: false %><br/>
+        
+      <% end %>
+    <% end %>
+  <% else %>
+
+    <%= render "partials/permit", title: "You're almost there!",
+        portfolio: @portfolio, status: current_user.status,
+        redirect: true %>
+
+  <% end %>
+<% end %>
+
+<% if current_user.role == "admin" %>
+
+  <h2>Recent Transactions (<%= @stock.symbol %>)</h2>
+
+  <% if !@recent_transactions.empty? %>
+
+    <% @recent_transactions.each do |transaction| %>
+   
+      <%= render "partials/transaction_item", transaction: transaction, time: false, admin: true %><br/>
+
+    <% end %>
+  <% else %>
+
+    <p>There are no recent transactions with this stock</p>
+
+  <% end %>
+<% end %>
+
+

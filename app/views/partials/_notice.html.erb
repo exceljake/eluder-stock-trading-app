@@ -1,0 +1,55 @@
+<div>
+  <h3><%= title %></h3>
+  
+  <% pending = check[:pending] %>
+
+  <% if pending %>
+
+    <% count = pending.count %>
+		<p>There <%= count == 1 ? "is" : "are" %> <%= count %> pending trader <%= "account".pluralize(count) %> waiting for approval</p>
+		<%= link_to "Resolve", accounts_path %>
+
+  <% end %>
+
+  <% stock = check[:stock] %> 
+  <% property = check[:property] %>
+  
+  <% if stock %>
+    <p>Consider the following information:</p>
+    <ul>
+			<li>Your account balance is <%= format_currency(current_user.balance) %></li>
+    
+        <% if property %>
+
+					<li>You own <%= property.quantity %> <%= "unit".pluralize(property.quantity) %> 
+            of <%= property.stock.symbol %> stock</li>
+
+        <% else %>
+
+					<li>You do not own any <%= stock.symbol %> stock</li>
+
+				<% end %>
+
+    </ul>
+
+  <% end %>
+
+  <% account = check[:account] %>
+
+  <% if account %>
+
+    <p>Cannot show portfolio details because:</p>
+
+    <% if !account.portfolio %>
+
+      <li>Trader Portfolio is yet to be setup</li>
+
+    <% end %>
+    <% if account.status == "pending" %>
+
+      <li>Trader Account is yet to be approved</li>
+
+    <% end %>
+  <% end %>
+
+</div>

@@ -1,0 +1,22 @@
+<%= render "partials/header" %>
+<%= render "partials/navigation" %>
+<h1>Transaction Details</h1>
+<%= link_to "All Transactions", trader_transactions_path %>
+
+<div>
+  <div>
+    <img src="<%= @transaction.stock.logo %>" alt="<%= @transaction.stock.name %>">
+    <p><%= @transaction.stock.name %></p>
+    <p>Symbol: <%= @transaction.stock.symbol %></p>
+  </div>
+  <div>
+    <h2>Transaction No: <%= @transaction.id %></h2>
+    <p>Type: <%= @transaction.action.upcase %></p>
+    <p>Price: <%= format_currency(@transaction.price) %></p>
+    <p>Quantity: <%= @transaction.quantity %> <%= "unit".pluralize(@transaction.quantity) %></p>
+    <p>Total Amount: <%= format_currency(@transaction.total_amount) %></p>
+    <p>Completed:<%= @transaction.created_at.localtime.strftime("%l:%M %p %e %b %Y") %></p>
+  </div>
+</div>
+
+<%= link_to "See #{@transaction.stock.symbol} Profile", stock_path(@transaction.stock) %>

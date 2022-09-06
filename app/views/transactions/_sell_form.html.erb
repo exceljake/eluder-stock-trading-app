@@ -1,0 +1,5 @@
+<%= form_with(url: sell_transaction_path(@stock)) do |f| %>
+  <%= f.label :sell %>
+  <%= f.number_field :sell, value:0, step: 0.1, min: 0.1 %>
+  <%= f.submit "Submit" %>
+<% end %>

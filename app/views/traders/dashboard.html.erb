@@ -1,0 +1,49 @@
+
+<%= render "partials/navigation" %>
+
+<h1 class="mt-4 ml-4 text-2xl font-semibold">Trader Dashboard</h1>
+
+<div class="block p-6 max-w-sm bg-white rounded-lg border border-lime-500 shadow-md hover:bg-lime-500 dark:bg-lime-600 dark:border-lime-700 dark:hover:bg-lime-700">
+  <h2 class="text-center">Account</h2>
+  <p>Name: <%= "#{current_user.last_name}, #{current_user.first_name}" %></p>
+  <p>Email: <%= current_user.email %></p>
+  <p><%= current_user.status.capitalize %></p>
+  <p>Balance: <%= format_currency(current_user.balance) %></p>
+  <%= link_to "Edit", user_edit_path(current_user.role) %>
+</div>
+
+<% if @portfolio && current_user.status == "approved" %>
+  <% if !@portfolio.properties.empty? %>  
+  
+    <div>
+      <h2>Portfolio</h2>
+      <p>Worth: <%= format_currency(@portfolio.overall_worth) %></p>
+      <%= link_to "View", trader_portfolio_path %>
+    </div>
+
+    <div>
+      <h2>Recent Transactions</h2>
+      <% @transactions.each do |transaction| %>
+
+        <%= render "partials/transaction_item", transaction: transaction, time: false, admin: false %><br/>
+
+      <% end %>
+      
+      <%= link_to "See More", trader_transactions_path %>
+    </div>
+
+  <% else %>
+
+    <%= render "partials/permit", title: "Great! You're all set",
+        portfolio: @portfolio, status: current_user.status,
+        redirect: nil %>
+
+  <% end %>
+  
+<% else %>
+
+  <%= render "partials/permit", title: "You're almost there!",
+        portfolio: @portfolio, status: current_user.status,
+        redirect: true %>
+
+<% end %>

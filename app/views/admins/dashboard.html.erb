@@ -1,0 +1,33 @@
+<%= render "partials/header" %>
+<%= render "partials/navigation" %>
+
+<h1>Admin Dashboard</h1>
+
+<div>
+  <p><%= "#{current_user.last_name}, #{current_user.first_name}" %></p>
+  <p>Email: <%= current_user.email %></p>
+  <p><%= current_user.role.upcase %></p>
+  <%= link_to "Edit", user_edit_path(current_user.role) %>
+</div>
+
+<% if @traders.pending.count != 0 %>
+
+  <%= render "partials/notice", title: "Heads up!", check: { pending: @traders.pending } %>
+
+<% end %>
+
+<h2>Statistics</h2>
+
+<div>
+  <h3>Accounts <%= @traders.count %></h3>
+  <p>Pending <%= @traders.pending.count %></p>
+  <p>Approved <%= @traders.approved.count %></p>
+  <%= link_to "See Accounts", accounts_path  %>
+</div>
+
+<div>
+  <h3>Transactions <%= @transactions.count %></h3>
+  <p>Buy <%= @transactions.buy.count %></p>
+  <p>Sell <%= @transactions.sell.count %></p>
+  <%= link_to "See Transactions", admin_transactions_path %>
+</div>

@@ -1,0 +1,25 @@
+<%= render "partials/header" %>
+<%= render "partials/navigation" %>
+
+<h1>Stock Listings</h1>
+
+<div>
+
+  <%= form_with(url: check_stock_path) do |f| %>
+
+    <%= f.text_field :search, placeholder: "Ticker | Symbol" %>
+    <%= f.submit "Search" %>
+
+  <% end %>
+
+</div>
+
+<div>
+
+  <% @stocks.each do |stock| %>
+
+    <%= render "partials/stock_item", stock: stock %>
+    <hr>
+  <% end %>
+
+</div>

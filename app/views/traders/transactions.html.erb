@@ -1,0 +1,15 @@
+<%= render "partials/header" %>
+<%= render "partials/navigation" %>
+
+<h1>Your Transactions</h1>
+
+<h2>All Transactions</h2>
+<%= render "partials/transaction_group", collection: @all_transactions, admin: false %>
+
+<!--
+<h2>Buy Transactions</h2>
+<%= render "partials/transaction_group", collection: @buy_transactions, admin: false %>
+
+<h3>Sell Transactions</h3>
+<%= render "partials/transaction_group", collection: @sell_transactions, admin: true %>
+-->

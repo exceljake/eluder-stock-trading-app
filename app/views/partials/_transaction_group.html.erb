@@ -1,0 +1,26 @@
+<div>
+
+    <% if !collection.empty? %>
+
+      <% current_date = set_date(collection.first) %>
+      <p><strong><%= current_date.strftime("%e %b %Y") %></strong></p>
+
+      <% collection.each do |instance| %>
+
+        <% if current_date != set_date(instance) %>
+
+          <% current_date = set_date(instance) %>
+          <p><strong><%= current_date.strftime("%e %b %Y") %></strong></p>
+
+        <% end %>
+
+        <%= render "partials/transaction_item", transaction: instance, time: true, admin: admin %><br/>
+
+      <% end %>
+    <% else %>
+
+      <p>No Transactions have been made</p>
+
+    <% end %>
+
+</div>

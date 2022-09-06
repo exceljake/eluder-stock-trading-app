@@ -1,0 +1,55 @@
+<div class="flex items-center justify-center h-screen flex-col">
+  <h1 class="text-lime-600 font-mono text-4xl font-semibold">Eluder</h1>
+  <h2 class="text-lime-600 font-mono text-3xl font-semibold">Stock Trading App</h2> 
+  <h1 class="font-mono text-2xl font-semibold text-lime-600">Register</h1> <br/>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+  <div class="field mb-2">
+    <%= f.text_field :first_name, placeholder:"First Name", class: "w-64 h-11 border-solid border border-lime-600 rounded indent-2" %>
+    <% resource.errors.full_messages_for(:first_name).each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+    
+
+  <div class="field mb-2">
+    <%= f.text_field :last_name, placeholder: "Last Name", class: "w-64 h-11 border-solid border border-lime-600 rounded indent-2" %>
+    <% resource.errors.full_messages_for(:last_name).each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email Address", class: "w-64 h-11 border-solid border border-lime-600 rounded indent-2" %>
+    <% resource.errors.full_messages_for(:email).each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+
+  <div class="field mb-2">
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: "w-64 h-11 border-solid border border-lime-600 rounded indent-2" %>
+    <% resource.errors.full_messages_for(:password).each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+
+  <div class="field mb-2  ">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Retype Password", class: "w-64 h-11 border-solid border border-lime-600 rounded indent-2"   %>
+    <% resource.errors.full_messages_for(:password_confirmation).each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+
+  <div class="actions mb-4">
+    <%= f.submit "Register", class: "bg-lime-500 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded w-64 cursor-pointer" %>
+  </div> 
+<% end %>
+
+<%= render "users/shared/links" %>
+
+</div>
+

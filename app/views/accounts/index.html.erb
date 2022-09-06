@@ -1,0 +1,35 @@
+<%= render "partials/header" %>
+<%= render "partials/navigation" %>
+
+<h1>All Trader Accounts</h1>
+<%= link_to "Create", new_account_path %>
+
+<% unless @pending.empty? %>
+
+  <div>
+    <h2>Pending Accounts</h2>
+
+      <% @pending.each do |account| %>
+
+          <%= render "partials/account_item", account: account %>
+
+      <% end %>
+
+  </div>
+
+<% end %>
+<% unless @approved.empty? %>
+
+  <div>
+
+    <h2>Approved Accounts</h2>
+
+      <% @approved.each do |account| %>
+
+        <%= render "partials/account_item", account: account %>
+
+      <% end %>
+
+  </div>
+
+<% end %>

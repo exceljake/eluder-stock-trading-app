@@ -1,0 +1,16 @@
+<%= link_to stock_path(stock) do %>
+  
+  <div>
+    <img src="<%= stock.logo %>" 
+        alt="<%= stock.name %>" />
+    <div>
+      <h3><%= stock.name %></h3>
+      <p>Symbol: <%= stock.symbol %></p>
+      <p>Price: <%= format_currency(stock.latest_price) %></p>
+      <p><em>
+        Updated <%= stock.updated_at.localtime.strftime("%l:%M %p %e %b %Y") %>
+      </em></p>
+    </div>
+  </div>
+
+<% end %>

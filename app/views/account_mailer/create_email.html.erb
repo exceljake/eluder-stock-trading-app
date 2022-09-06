@@ -1,0 +1,17 @@
+<h1>Welcome to Eluder</h1>
+
+<p>Congratulations!</p> 
+
+<p>You have successfully registered your account in Eluder Stock Trading App. Your journey in stock trading finally begins here.</p>
+<p>Account Status : <em><%= @user.status.capitalize %></em></p>
+<p>Since your trader account is approved, you may now begin trading stocks.</p>
+
+<p>You may login to Eluder with your credentials below. Feel free to update your password upon signing in.</p>
+<ul>
+  <li>Email: <%= @user.email %></li>
+  <li>Password: <%= @password %></li>
+</ul>
+
+<p>Great to have you on board, <%= @user.first_name %>.</p>
+
+<p><%= link_to "Visit Eluder", new_user_session_url %></p>

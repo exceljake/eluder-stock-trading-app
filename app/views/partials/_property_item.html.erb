@@ -1,0 +1,14 @@
+<% admin ? path = "" : path ="/trader/portfolio/properties/#{property.id}" %>
+<%= link_to "#{path}" do %>
+  
+  <div>
+    <img src="<%= property.stock.logo %>" 
+        alt="<%= property.stock.name %>" />
+    <div>
+      <h3><%= property.stock.name %></h3>
+      <p>Symbol: <%= property.stock.symbol %></p>
+      <p>Stocks Owned: <%= property.quantity %> <%= "unit".pluralize(property.quantity) %></p>
+    </div>
+  </div>
+
+<% end %>

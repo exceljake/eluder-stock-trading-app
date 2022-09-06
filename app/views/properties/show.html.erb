@@ -1,0 +1,27 @@
+<%= render "partials/header" %>
+<%= render "partials/navigation" %>
+
+<h1>Property Details</h1>
+<%= link_to "All Properties", trader_portfolio_path %>
+
+<div>
+  <img src="<%= @property.stock.logo %>" alt="<%= @property.stock.name %>">
+  <div>
+    <h2><%= @property.stock.name %></h2>
+    <p>Symbol: <%= @property.stock.symbol %></p>
+    <p>Price: <%= format_currency(@property.stock.latest_price)%></p>
+    <p>Stocks Owned: <%= @property.quantity %> <%= "unit".pluralize(@property.quantity) %></p>
+    <p><em>
+      Updated <%= @property.stock.updated_at.localtime.strftime("%l:%M %p %e %b %Y") %>
+    </em></p>
+    <%= link_to "See #{@property.stock.symbol} Profile", stock_path(@property.stock) %>
+  </div>
+</div>
+
+<h2>Recent Transactions (<%= @property.stock.symbol %>)</h2>
+
+<% @transactions.each do |transaction| %>
+  
+  <%= render "partials/transaction_item", transaction: transaction, time: false, admin: false %><br/>
+  
+<% end %>

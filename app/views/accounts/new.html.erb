@@ -1,0 +1,33 @@
+<h1>Create Trader Account</h1>
+<%= link_to "Cancel", accounts_path %>
+<%= render "partials/navigation" %>
+
+<%= form_with(scope: @account, url: accounts_path) do |f| %>
+
+  <div>
+    <%= f.label :first_name %><br/>
+    <%= f.text_field :first_name %>
+    <% @account.errors.full_messages_for(:first_name).each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :last_name %><br/>
+    <%= f.text_field :last_name %>
+    <% @account.errors.full_messages_for(:last_name).each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+  
+  <div>
+    <%= f.label :email %><br/>
+    <%= f.email_field :email %>
+    <% @account.errors.full_messages_for(:email).each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+
+  <%= f.submit "Create Trader"%>
+<% end %>
+

@@ -1,0 +1,48 @@
+<%= render "partials/navigation" %>
+
+<h1 class="mt-4 ml-4 text-2xl font-semibold">Trader Portfolio </h1>
+
+<% if !@portfolio %>
+
+  <div>
+    <h2>Setup Portfolio</h3>
+    <p>All it takes is single click! It's that easy!</p>
+    <%= link_to "Setup", create_portfolio_path, data: { turbo_method: :post } %>		
+  </div>
+  
+<% else %>
+
+<div class="block p-6 max-w-sm bg-white rounded-lg border border-lime-500 shadow-md hover:bg-lime-500 dark:bg-lime-600 dark:border-lime-700 dark:hover:bg-lime-700">
+  <div>
+    <p>Total Worth: <%= format_currency(@portfolio.overall_worth) %></p>
+    <p>Properties Owned: <%= @properties.count %></p>
+  </div>
+
+<% end %>
+
+
+<% if @portfolio && current_user.status == "approved" %>
+
+  <h2>Properties</h2>
+
+  <% if !@properties.empty? %>
+    <% @properties.each do |property| %>
+
+      <%= render "partials/property_item", admin: false, property: property %> 
+
+    <% end %> 
+  <% else %>
+    
+    <%= render "partials/permit", title: "Great! You're all set",
+      portfolio: @portfolio, status: current_user.status,
+      redirect: nil %>
+
+  <% end %>
+<% else %>
+
+  <%= render "partials/permit", title: "You're almost there!",
+        portfolio: @portfolio, status: current_user.status,
+        redirect: nil %>
+
+<% end %>
+</div>

@@ -1,0 +1,11 @@
+<div class="flex items-center justify-center h-screen flex-col">
+    <h1 class="text-lime-600 font-mono text-4xl font-semibold">Eluder</h1>
+    <h2 class="text-lime-600 font-mono text-3xl font-semibold">Stock Trading App</h2> <br/>
+    <%= image_tag("logos/favicon.png") %> <br/>
+    <h1 class="text-lime-600 font-mono text-2xl text-center">Trade with Eluder, <br/>be rich with Eluder.</h1> <br/>
+
+    <div class="flex flex-row w-48 justify-between">
+        <%= link_to "Login", user_session_path, class:  "bg-lime-500 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded" %>
+        <%= link_to "Register", register_path, class: "bg-lime-500 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+</div>
